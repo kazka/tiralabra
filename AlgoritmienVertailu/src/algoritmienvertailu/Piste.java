@@ -4,7 +4,7 @@ package algoritmienvertailu;
 /**
  * Yhtä labyrintin pistettä kuvaava luokka.
  */
-public class Piste implements Comparable {
+public class Piste implements Comparable<Piste> {
     private int x;
     private int y;
     private String color;
@@ -57,11 +57,16 @@ public class Piste implements Comparable {
     public void setEdellinen(Piste p){
         this.edellinen = p;
     }
-    
+
     @Override
-    public int compareTo(Object o) {
-        Piste p = (Piste) o;
-        return this.dist - p.getDist();
+    public int compareTo(Piste o) {
+        if(this.dist == o.getDist()) {
+            return 0;
+        } else if (this.dist > o.getDist()) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
 }

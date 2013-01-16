@@ -15,11 +15,13 @@ public class AlgoritmienVertailu {
     
     public void start(){
         Dijkstra dj = new Dijkstra(labyrintti);
+        dj.dijkstraa();
+        dj.tulosta();
     }
     
     static int[][] labyrintti = new int[][] 
-       {{1, 0, 0, 1, 1},
-        {1, 1, 0, 1, 0},
+       {{1, 1, 0, 1, 1},
+        {0, 1, 0, 1, 0},
         {0, 1, 1, 1, 0},
-        {0, 0, 1, 1, 1}};    
+        {0, 0, 0, 1, 1}};    
 }
