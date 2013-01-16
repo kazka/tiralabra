@@ -1,19 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package algoritmienvertailu;
 
 /**
- *
- * @author kaka
+ * Algoritmien vertailuun liittyvä pääluokka.
+ * Algoritmien tarkoituksena on löytää lyhin reitti labyrintistä ulos,
+ * eli vasemman yläkulman ruudusta oikean alakulman ruutuun.
  */
 public class AlgoritmienVertailu {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+
+    public AlgoritmienVertailu() {
+        
     }
+    
+    public void start(){
+        Dijkstra dj = new Dijkstra(labyrintti);
+    }
+    
+    static int[][] labyrintti = new int[][] 
+       {{1, 0, 0, 1, 1},
+        {1, 1, 0, 1, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 1, 1}};    
 }
