@@ -8,13 +8,20 @@ import algoritmienvertailu.Piste;
  * Minimiarvona käytetään keossa olevan pisteen dist-arvoa.
  */
 public class MinimiKeko {
-
+    /** 
+     * Kekoon liittyvä taulukko jossa kekoon lisätyt pisteet
+     */
     private Piste[] taulukko;
     /** 
-     * Paikkojen lukumäärä keossa
+     * Pisteiden lukumäärä keossa
      */
     private int n = 0;
  
+    /** 
+     * Konstruktori, luo kekoon liittyvän taulukon
+     * 
+     * @param size Luotavan taulukon koko
+     */
     public MinimiKeko(int size) {
         this.taulukko = new Piste[size];
     }
@@ -100,16 +107,31 @@ public class MinimiKeko {
             heapifyAlaspain(pieninlapsi);
         }
     }
+    
+    /**
+     * Etsitään keosta piste jonka dist-arvo on muuttunut ja suoritetaan heapify
+     * siitä pisteestä ylöspäin.
+     */
+    public void decKey(Piste p){
+        for (int i = 0; i < n; i++){
+            if (taulukko[i].equals(p)){
+                heapifyYlospain(i);
+            }
+        }
+    }
  
     /** 
      * Apumetodi jolla vaihdetaan kahden pisteen paikkaa keossa 
      */
-    private void vaihda(int a, int b) {
-        Piste apu = taulukko[a];
-        taulukko[a] = taulukko[b];
-        taulukko[b] = apu;
+    private void vaihda(int pienin, int index) {
+        Piste apu = taulukko[pienin];
+        taulukko[pienin] = taulukko[index];
+        taulukko[index] = apu;
     }
     
+    /** 
+     * Tulostaa keossa olevat pisteet/niiden koordinaatit järjestyksessä
+     */
     public void tulosta(){
         for (int i = 0; i < n; i++){
             System.out.print(taulukko[i].getX() + "," + taulukko[i].getY() + "..");

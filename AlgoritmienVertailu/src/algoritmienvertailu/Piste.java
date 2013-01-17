@@ -5,12 +5,40 @@ package algoritmienvertailu;
  * Yhtä labyrintin pistettä kuvaava luokka.
  */
 public class Piste implements Comparable<Piste> {
+    /**
+     * Sarake jolla piste sijaitsee
+     */
     private int x;
+    /**
+     * Rivi jolla piste sijaitsee
+     */
     private int y;
+    /**
+     * Pisteen väri, vaihtoehdot "white", "gray" tai "black".
+     * Kuvaavat sitä onko piste kyseisellä hetkellä käsiteltävänä.
+     * White = ei vielä käsiteltävänä
+     * Gray = käsiteltävänä
+     * Black = käsitelty loppuun
+     */
     private String color;
+    /**
+     * Etäisyys aloituspisteestä, tähän mennessä pienin löydetty etäisyys
+     */
     private int dist;
+    /**
+     * Piste jonka kautta pisteeseen tultiin
+     */
     private Piste edellinen;
     
+    /**
+     * Konstruktori
+     * 
+     * @param x Sarake jolla piste sijaitsee
+     * @param y Rivi jola piste sijaitsee
+     * @param color Pisteen väri, aluksi kaikilla "white"
+     * @param dist Pisteen etäisyys aloituspisteestä, aluksi kaikilla paitsi
+     * aloituspisteellä Integer.MAX_VALUE
+     */
     public Piste(int x, int y, String color, int dist){
         this.x = x;
         this.y = y;
