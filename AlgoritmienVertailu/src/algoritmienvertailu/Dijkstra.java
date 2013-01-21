@@ -2,10 +2,23 @@ package algoritmienvertailu;
 
 import aputietorakenteet.MinimiKeko;
 
+/**
+* Dijkstran algoritmi.
+* Etsii labyrintistä lyhimmän polun aloituspisteestä maaliin ja samalla lyhimmät
+* etäisyydet aloituspisteestä kaikkiin pisteisiin.
+*/
 public class Dijkstra {
-
+    /**
+     * Labyrintti kuvattuna 2-ulotteisena taulukkona
+     */
     private int[][] laby;
+    /**
+     * Piste-olioista koostuva taulukko
+     */
     private Piste[][] pisteet;
+    /**
+     * Aputietorakenteena käytettävä minimikeko
+     */
     private MinimiKeko keko;
 
     public Dijkstra(int[][] laby) {
@@ -88,7 +101,7 @@ public class Dijkstra {
     }
     
     public void tulostaPolku(){
-        Piste maali = this.pisteet[this.pisteet.length - 1][this.pisteet[0].length - 1];
+        Piste maali = getMaalipiste();
         
         if (maali.getDist() == Integer.MAX_VALUE){
             System.out.println("maalia ei saavutettu");
@@ -106,4 +119,21 @@ public class Dijkstra {
         
         System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + maali.getDist());
     }
+    
+    public Piste getMaalipiste(){
+        return this.pisteet[this.pisteet.length - 1][this.pisteet[0].length - 1];
+    }
+
+    public Piste[][] getPisteet() {
+        return pisteet;
+    }
+
+    public MinimiKeko getKeko() {
+        return keko;
+    }
+
+    public int[][] getLaby() {
+        return laby;
+    }
+    
 }

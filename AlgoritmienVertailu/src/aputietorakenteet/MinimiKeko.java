@@ -15,7 +15,7 @@ public class MinimiKeko {
     /** 
      * Pisteiden lukumäärä keossa
      */
-    private int n = 0;
+    private int pisteidenMaara = 0;
  
     /** 
      * Konstruktori, luo kekoon liittyvän taulukon
@@ -35,8 +35,8 @@ public class MinimiKeko {
         }
  
         Piste min = taulukko[0];
-        taulukko[0] = taulukko[n - 1];
-        if(--n > 0){
+        taulukko[0] = taulukko[pisteidenMaara - 1];
+        if(--pisteidenMaara > 0){
             heapifyAlaspain(0);
         }
         return min;
@@ -57,20 +57,21 @@ public class MinimiKeko {
      * Tarkistaa onko keko tyhjä
      */
     public boolean isEmpty() {
-        return n == 0;
+        return pisteidenMaara == 0;
     }
  
     /** 
      * Lisää kekoon uuden pisteen ja pitää yllä kekoehtoa alhaalta ylöspäin
      */
     public void add(Piste p) {
-        if(n == taulukko.length) {
+        if(pisteidenMaara == taulukko.length) {
             System.out.println("keko on täynnä");
+            return;
         }
  
-        taulukko[n] = p;
-        heapifyYlospain(n);
-        n++;
+        taulukko[pisteidenMaara] = p;
+        heapifyYlospain(pisteidenMaara);
+        pisteidenMaara++;
     }
  
     /**
@@ -89,13 +90,13 @@ public class MinimiKeko {
  
     /**
      * Varmistaa että kekoehto pysyy voimassa.
-     * Kutsutaan kun keosta poistetaan pienimmän dist-arvon omaava piste.
+     * Kutsutaan kun keosta poistetaan piste jolla pienin dist-arvo.
      */
     private void heapifyAlaspain(int index) {
-        int vasen = 2 * index + 1;
-        int oikea = 2 * index + 2;
+        int vasen = vasen(index);
+        int oikea = oikea(index);
  
-        if(oikea >= n && vasen >= n){
+        if(oikea >= pisteidenMaara && vasen >= pisteidenMaara){
             return;
         }
  
@@ -108,12 +109,20 @@ public class MinimiKeko {
         }
     }
     
+    public int oikea(int index){
+        return 2 * index + 2;
+    }
+    
+    public int vasen(int index){
+        return 2 * index + 1;
+    }
+    
     /**
      * Etsitään keosta piste jonka dist-arvo on muuttunut ja suoritetaan heapify
      * siitä pisteestä ylöspäin.
      */
     public void decKey(Piste p){
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < pisteidenMaara; i++){
             if (taulukko[i].equals(p)){
                 heapifyYlospain(i);
             }
@@ -133,9 +142,19 @@ public class MinimiKeko {
      * Tulostaa keossa olevat pisteet/niiden koordinaatit järjestyksessä
      */
     public void tulosta(){
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < pisteidenMaara; i++){
             System.out.print(taulukko[i].getX() + "," + taulukko[i].getY() + "..");
         }
     }
+
+    public int getPisteidenMaara() {
+        return pisteidenMaara;
+    }
+
+    public Piste[] getTaulukko() {
+        return taulukko;
+    }
+    
+    
  
 }
