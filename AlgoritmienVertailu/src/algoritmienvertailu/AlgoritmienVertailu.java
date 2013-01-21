@@ -9,10 +9,16 @@ package algoritmienvertailu;
 public class AlgoritmienVertailu {
 
 
+    /**
+     * Konstruktori
+     */
     public AlgoritmienVertailu() {
         
     }
     
+    /**
+     * Aloittaa algoritmien toiminnan
+     */
     public void start(){
         Dijkstra dj = new Dijkstra(labyrintti);
         dj.dijkstraa();

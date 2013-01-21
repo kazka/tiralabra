@@ -109,10 +109,16 @@ public class MinimiKeko {
         }
     }
     
+    /**
+     * Palauttaa indeksin keossa oikeanpuoleiseen alkioon
+     */
     public int oikea(int index){
         return 2 * index + 2;
     }
     
+    /**
+     * Palauttaa indeksin keossa vasemmanpuoleiseen alkioon
+     */
     public int vasen(int index){
         return 2 * index + 1;
     }
