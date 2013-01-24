@@ -23,6 +23,10 @@ public class AlgoritmienVertailu {
         Dijkstra dj = new Dijkstra(labyrintti);
         dj.dijkstraa();
         dj.tulosta();
+        System.out.println("");
+        Astar ast = new Astar(labyrintti);
+        ast.astaraa();
+        ast.tulosta();        
     }
     
     static int[][] labyrintti = new int[][] 

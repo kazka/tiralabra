@@ -34,7 +34,7 @@ public class Piste implements Comparable<Piste> {
      * Konstruktori
      * 
      * @param x Sarake jolla piste sijaitsee
-     * @param y Rivi jola piste sijaitsee
+     * @param y Rivi jolla piste sijaitsee
      * @param color Pisteen väri, aluksi kaikilla "white"
      * @param dist Pisteen etäisyys aloituspisteestä, aluksi kaikilla paitsi
      * aloituspisteellä Integer.MAX_VALUE
