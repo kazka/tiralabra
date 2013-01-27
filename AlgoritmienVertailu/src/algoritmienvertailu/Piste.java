@@ -31,7 +31,7 @@ public class Piste implements Comparable<Piste> {
     private Piste edellinen;
     
     /**
-     * Konstruktori
+     * Dijkstran (ja A starin) käyttämä konstruktori
      * 
      * @param x Sarake jolla piste sijaitsee
      * @param y Rivi jolla piste sijaitsee
@@ -46,6 +46,20 @@ public class Piste implements Comparable<Piste> {
         this.dist = dist;
     }
 
+    /**
+     * Bellman-Fordin käyttämä konstruktori, toimii ilman värin määritelyä.
+     * 
+     * @param x Sarake jolla piste sijaitsee
+     * @param y Rivi jolla piste sijaitsee
+     * @param dist Pisteen etäisyys aloituspisteestä, aluksi kaikilla paitsi
+     * aloituspisteellä Integer.MAX_VALUE
+     */
+    public Piste(int x, int y, int dist){
+        this.x = x;
+        this.y = y;
+        this.dist = dist;
+    }    
+    
     public String getColor() {
         return color;
     }

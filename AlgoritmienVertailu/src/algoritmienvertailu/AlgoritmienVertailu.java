@@ -24,9 +24,16 @@ public class AlgoritmienVertailu {
         dj.dijkstraa();
         dj.tulosta();
         System.out.println("");
+        
         Astar ast = new Astar(labyrintti);
         ast.astaraa();
-        ast.tulosta();        
+        ast.tulosta();
+        System.out.println("");
+        
+        BellmanFord bf = new BellmanFord(labyrintti);
+        bf.bellman();
+        bf.tulosta();
+        System.out.println("");        
     }
     
     static int[][] labyrintti = new int[][] 
