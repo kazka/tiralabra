@@ -62,7 +62,6 @@ public class Dijkstra {
      */
     public void dijkstraa() {
         while (!this.keko.isEmpty()) {
-            //  keko.tulosta();
             Piste u = keko.vilkaise();
             u.setColor("gray");
             tutkiViereiset(u);

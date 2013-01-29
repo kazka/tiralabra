@@ -115,8 +115,7 @@ public class MinimiKeko {
  
         if(!onkoEnempaaLapsia(oikea, vasen)) return;
  
-        int pieninlapsi = 
-            taulukko[oikea].getDist() > taulukko[vasen].getDist() ? vasen : oikea;
+        int pieninlapsi = taulukko[oikea].getDist() > taulukko[vasen].getDist() ? vasen : oikea;
  
         if(taulukko[index].getDist() > taulukko[pieninlapsi].getDist()) {
             vaihda(pieninlapsi, index);

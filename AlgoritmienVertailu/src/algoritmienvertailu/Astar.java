@@ -72,7 +72,6 @@ public class Astar {
      */
     public void astaraa() {
         while (!this.tutkitut.contains(getMaalipiste())) {
-            //  keko.tulosta();
             AstarPiste u = this.keko.remove();
             this.tutkitut.add(u);
             tutkiViereiset(u);

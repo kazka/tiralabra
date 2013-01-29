@@ -98,8 +98,7 @@ public class AstarMinimiKeko {
  
         if(!onkoEnempaaLapsia(oikea, vasen)) return;
  
-        int pieninlapsi = 
-            taulukko[oikea].getAlkuunPlusLoppuun() > taulukko[vasen].getAlkuunPlusLoppuun() ? vasen : oikea;
+        int pieninlapsi = taulukko[oikea].getAlkuunPlusLoppuun() > taulukko[vasen].getAlkuunPlusLoppuun() ? vasen : oikea;
  
         if(taulukko[index].getAlkuunPlusLoppuun() > taulukko[pieninlapsi].getAlkuunPlusLoppuun()) {
             vaihda(pieninlapsi, index);
