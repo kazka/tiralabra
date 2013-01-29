@@ -80,23 +80,29 @@ public class Astar {
     }
 
     /**
-     * Metodi jolla tutkitaan kaikki pisteen viereiset pisteet, mikäli kyseinen
-     * viereinen piste on tutkittavalla alueella.
+     * Metodi jolla kutsutaan jokaiselle pisteen u viereiselle pisteelle
+     * tarkistaJaRelaxoi-metodia.
      *
      * @param u Piste jonka viereiset pisteet tutkitaan
      */
     public void tutkiViereiset(AstarPiste u) {
-        if (onkoAlueella(u.getX(), u.getY() - 1)) {
-            relax(u, pisteet[u.getY() - 1][u.getX()]);
-        }
-        if (onkoAlueella(u.getX(), u.getY() + 1)) {
-            relax(u, pisteet[u.getY() + 1][u.getX()]);
-        }
-        if (onkoAlueella(u.getX() - 1, u.getY())) {
-            relax(u, pisteet[u.getY()][u.getX() - 1]);
-        }
-        if (onkoAlueella(u.getX() + 1, u.getY())) {
-            relax(u, pisteet[u.getY()][u.getX() + 1]);
+        tarkistaJaRelaxoi(u, u.getX(), u.getY() - 1);
+        tarkistaJaRelaxoi(u, u.getX(), u.getY() + 1);
+        tarkistaJaRelaxoi(u, u.getX() - 1, u.getY());
+        tarkistaJaRelaxoi(u, u.getX() + 1, u.getY());
+    }
+    
+    /**
+     * Metodi jolla tarkistetaan onko kyseinen pisteen u viereinen piste tutkittavalla
+     * alueella ja kutsutaan relax-metodia jos on.
+     *
+     * @param u Piste jonka viereistä pistettä tutkitaan
+     * @param x Sarake jolla kyseinen pisteen u viereinen piste sijaitsee
+     * @param y Rivi jolla kyseinen pisteen u viereinen piste sijaitsee
+     */ 
+    public void tarkistaJaRelaxoi(AstarPiste u, int x, int y){
+        if (onkoAlueella(x, y)) {
+            relax(u, pisteet[y][x]);
         }
     }
 
@@ -174,22 +180,48 @@ public class Astar {
         System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + maali.getDist());
     }
 
+    /**
+     * Palauttaa maalipisteen, eli labyrintin oikeassa alakulmassa olevan pisteen
+     *
+     * @return maalipiste
+     */
     public AstarPiste getMaalipiste() {
         return this.pisteet[this.pisteet.length - 1][this.pisteet[0].length - 1];
     }
 
+    /**
+     * Palauttaa 2-ulotteisen taulukon joka sisältää labyrintin pisteet
+     *
+     * @return taulukko jossa pisteet
+     */
     public AstarPiste[][] getPisteet() {
         return pisteet;
     }
 
+    /**
+     * Palauttaa A stariin liittyvän minimikeon
+     *
+     * @return keko
+     */
     public AstarMinimiKeko getKeko() {
         return keko;
     }
 
+    /**
+     * Palauttaa labyrinttiin liittyvän 2-ulotteisen int-taulukon jossa listattu polut
+     * ykkösillä ja poluttomat kohdat nollilla
+     *
+     * @return labyrintti int-taulukkona
+     */
     public int[][] getLaby() {
         return laby;
     }
 
+    /**
+     * Palauttaa listan joka sisältää jo tutkitut pisteet
+     *
+     * @return tutkittujen pisteiden lista
+     */
     public ArrayList<AstarPiste> getTutkitut() {
         return tutkitut;
     }

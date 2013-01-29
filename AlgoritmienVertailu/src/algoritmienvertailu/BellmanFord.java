@@ -193,22 +193,48 @@ public class BellmanFord {
         System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + maali.getDist());
     }
     
-    public Piste getMaalipiste(){
+    /**
+     * Palauttaa maalipisteen, eli labyrintin oikeassa alakulmassa olevan pisteen
+     *
+     * @return maalipiste
+     */
+    public Piste getMaalipiste() {
         return this.pisteet[this.pisteet.length - 1][this.pisteet[0].length - 1];
     }
 
+    /**
+     * Palauttaa 2-ulotteisen taulukon joka sisältää labyrintin pisteet
+     *
+     * @return taulukko jossa pisteet
+     */
     public Piste[][] getPisteet() {
         return pisteet;
     }
 
+    /**
+     * Palauttaa labyrinttiin liittyvän 2-ulotteisen int-taulukon jossa listattu polut
+     * ykkösillä ja poluttomat kohdat nollilla
+     *
+     * @return labyrintti int-taulukkona
+     */
     public int[][] getLaby() {
         return laby;
     }
 
+    /**
+     * Palauttaa listan labyrinttiin liittyvistä kaarista
+     *
+     * @return lista kaarista
+     */
     public ArrayList<Kaari> getKaaret() {
         return kaaret;
     }
 
+    /**
+     * Palauttaa labyrintin solmujen määrän eli polkujen pisteiden määrän yhteensä
+     *
+     * @return solmujen määrä
+     */
     public int getSolmumaara() {
         return solmumaara;
     }

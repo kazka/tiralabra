@@ -5,7 +5,7 @@ package algoritmienvertailu;
  */
 public class AstarPiste extends Piste {
     /**
-    * Arvio pisteen etäisyydestä maalipisteeseen.
+    * Arvio pisteen etäisyydestä maalipisteeseen
     */
     private int distLoppuun;
     /**
@@ -42,19 +42,40 @@ public class AstarPiste extends Piste {
         }
     }
 
+    /**
+     * Palauttaa arvion pisteen etäisyydestä maalipisteeseen
+     *
+     * @return arvio pisteen etäisyydestä maalipisteeseen
+     */
     public int getDistLoppuun() {
         return distLoppuun;
     }
 
+    /**
+     * Asettaa pisteelle arvion etäisyydestä maalipisteeseen
+     *
+     * @param distLoppuun Arvio etäisyydestä maalipisteeseen
+     */
     public void setDistLoppuun(int distLoppuun) {
         this.distLoppuun = distLoppuun;
     }
     
+    /**
+     * Palauttaa pistettä edeltävän Astar-pisteen lyhimmällä löydetyllä polulla
+     *
+     * @return edeltävä Astar-piste
+     */
     @Override
     public AstarPiste getEdellinen(){
         return this.edellinen;
     }
 
+    /**
+     * Asettaa edeltäväksi pisteeksi Astar-pisteen josta tähän pisteeseen tultiin
+     * lyhimmällä löydetyllä polulla
+     *
+     * @param edellinen Astar-piste josta tultiin
+     */
     public void setEdellinen(AstarPiste edellinen) {
         this.edellinen = edellinen;
     }

@@ -28,11 +28,11 @@ public class MinimiKeko {
  
     /** 
      * Poistaa keosta ja palauttaa pisteen jolla on pienin dist-arvo
+     * 
+     * @return piste jolla pienin dist-arvo
      */
     public Piste remove() {
-        if(isEmpty()) {
-            System.out.println("keko on tyhjä");
-        }
+        tarkistaTyhjyys();
  
         Piste min = taulukko[0];
         taulukko[0] = taulukko[pisteidenMaara - 1];
@@ -41,20 +41,31 @@ public class MinimiKeko {
         }
         return min;
     }
-    
-     /** 
-      * Palauttaa pisteen jolla on pienin dist-arvo muttei poista sitä keosta
-      */
-    public Piste vilkaise() {
+
+    /** 
+     * Tarkistaa onko keko tyhjä, jos on niin tulostaa siitä ilmoituksen
+     */
+    public void tarkistaTyhjyys() {
         if(isEmpty()) {
             System.out.println("keko on tyhjä");
         }
+    }
+    
+     /** 
+      * Palauttaa pisteen jolla on pienin dist-arvo muttei poista sitä keosta
+      * 
+      * @return piste jolla pienin dist-arvo
+      */
+    public Piste vilkaise() {
+        tarkistaTyhjyys();
  
         return taulukko[0];
     }
     
     /** 
      * Tarkistaa onko keko tyhjä
+     * 
+     * @return true jos keko on tyhjä
      */
     public boolean isEmpty() {
         return pisteidenMaara == 0;
@@ -62,6 +73,8 @@ public class MinimiKeko {
  
     /** 
      * Lisää kekoon uuden pisteen ja pitää yllä kekoehtoa alhaalta ylöspäin
+     * 
+     * @param p Lisättävä piste
      */
     public void add(Piste p) {
         if(pisteidenMaara == taulukko.length) {
@@ -77,6 +90,8 @@ public class MinimiKeko {
     /**
      * Varmistaa että kekoehto pysyy voimassa.
      * Kutsutaan kun kekoon lisätään uusi piste.
+     * 
+     * @param index Indeksi josta ylöspäin (taulukossa alkuun päin) heapify suoritetaan
      */
     private void heapifyYlospain(int index) {
         if(index > 0) {
@@ -91,14 +106,14 @@ public class MinimiKeko {
     /**
      * Varmistaa että kekoehto pysyy voimassa.
      * Kutsutaan kun keosta poistetaan piste jolla pienin dist-arvo.
+     * 
+     * @param index Indeksi josta alaspäin (taulukossa loppuun päin) heapify suoritetaan
      */
     private void heapifyAlaspain(int index) {
         int vasen = vasen(index);
         int oikea = oikea(index);
  
-        if(oikea >= pisteidenMaara && vasen >= pisteidenMaara){
-            return;
-        }
+        if(!onkoEnempaaLapsia(oikea, vasen)) return;
  
         int pieninlapsi = 
             taulukko[oikea].getDist() > taulukko[vasen].getDist() ? vasen : oikea;
@@ -110,7 +125,28 @@ public class MinimiKeko {
     }
     
     /**
+     * Tarkistaa onko pisteellä keossa vielä lapsia.
+     * 
+     * @param oikea Indeksi josta oikean lapsen pitäisi löytyä
+     * @param vasen Indeksi josta vasemman lapsen pitäisi löytyä
+     * 
+     * @return true jos molemmat tai jompikumpi lapsista on olemassa,
+     * false jos oikean ja vasemman lapsen indeksit menevät yli keon koon
+     * eli pisteiden määrän
+     */
+    public boolean onkoEnempaaLapsia(int oikea, int vasen) {
+        if (oikea >= pisteidenMaara && vasen >= pisteidenMaara) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Palauttaa indeksin keossa oikeanpuoleiseen alkioon
+     * 
+     * @param index Indeksi jonka oikeanpuoleisen alkion indeksiä haetaan
+     * 
+     * @return indeksi oikeanpuoleiseen alkioon
      */
     public int oikea(int index){
         return 2 * index + 2;
@@ -118,6 +154,10 @@ public class MinimiKeko {
     
     /**
      * Palauttaa indeksin keossa vasemmanpuoleiseen alkioon
+     * 
+     * @param index Indeksi jonka vasemmanpuoleisen alkion indeksiä haetaan
+     * 
+     * @return indeksi vasemmanpuoleiseen alkioon
      */
     public int vasen(int index){
         return 2 * index + 1;
@@ -126,6 +166,8 @@ public class MinimiKeko {
     /**
      * Etsitään keosta piste jonka dist-arvo on muuttunut ja suoritetaan heapify
      * siitä pisteestä ylöspäin.
+     * 
+     * @param p Piste jonka dist-arvo on muuttunut
      */
     public void decKey(Piste p){
         for (int i = 0; i < pisteidenMaara; i++){
@@ -137,6 +179,9 @@ public class MinimiKeko {
  
     /** 
      * Apumetodi jolla vaihdetaan kahden pisteen paikkaa keossa 
+     * 
+     * @param pienin Indeksi pisteen lapsista siihen jolla on pienin dist-arvo
+     * @param index Indeksi pisteeseen jonka paikkaa vaihdetaan pienimmän lapsensa kanssa
      */
     private void vaihda(int pienin, int index) {
         Piste apu = taulukko[pienin];
@@ -153,10 +198,20 @@ public class MinimiKeko {
         }
     }
 
+    /**
+     * Palauttaa pisteiden määrän keossa tällä hetkellä
+     *
+     * @return pisteiden määrä
+     */
     public int getPisteidenMaara() {
         return pisteidenMaara;
     }
 
+    /**
+     * Palauttaa minimikekoon liittyvän Piste-taulukon
+     *
+     * @return kekoon liittyvä taulukko
+     */
     public Piste[] getTaulukko() {
         return taulukko;
     }
