@@ -43,8 +43,8 @@ public class AlgoritmienVertailu {
         {0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
         {0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
         {1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0},
-        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0},   
-        {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0},  
+        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0},
+        {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0},
         {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
         {1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -87,7 +87,7 @@ public class AlgoritmienVertailu {
      * Aloittaa ja tulostaa Dijkstran
      */
     public void aloitaJaTulostaDijkstra() {
-        Dijkstra dj = new Dijkstra(labyrintti30x30);
+        Dijkstra dj = new Dijkstra(labyrintti5x5);
         dj.dijkstraa();
         dj.tulosta();
         System.out.println("");
@@ -97,7 +97,7 @@ public class AlgoritmienVertailu {
      * Aloittaa ja tulostaa A starin
      */
     public void aloitaJaTulostaAstar() {
-        Astar ast = new Astar(labyrintti30x30);
+        Astar ast = new Astar(labyrintti5x5);
         ast.astaraa();
         ast.tulosta();
         System.out.println("");
@@ -107,7 +107,7 @@ public class AlgoritmienVertailu {
      * Aloittaa ja tulostaa Bellman-Fordin
      */
     public void aloitaJaTulostaBellman() {
-        BellmanFord bf = new BellmanFord(labyrintti30x30);
+        BellmanFord bf = new BellmanFord(labyrintti5x5);
         bf.bellman();
         bf.tulosta();
         System.out.println("");
