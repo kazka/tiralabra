@@ -27,30 +27,30 @@ public class Astar {
     private ArrayList<AstarPiste> tutkitut;
 
     /**
-     * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon
-     * jakutsuu metodia joka alustaa tarvittavat toiminnot.
+     * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon.
+     * Luo 2-ulotteisen taulukon jossa pidetään kirjaa labyrinttiin liittyvistä 
+     * AstarPiste-olioista, sekä aputietorakenteena käytettävän minimikeon ja 
+     * listan jossa on jo tutkitut pisteet.
+     * Kutsuu metodia joka alustaa tarvittavat toiminnot.
      *
      * @param laby Labyrinttinä käytettävä taulukko
      */
     public Astar(int[][] laby) {
         this.laby = laby;
+        this.pisteet = new AstarPiste[this.laby.length][this.laby[0].length];
+        this.keko = new AstarMinimiKeko(this.laby.length * this.laby[0].length);        
+        this.tutkitut = new ArrayList();       
         alusta();
     }
 
     /**
-     * Alustaa tarvittavat toiminnot. Luo 2-ulotteisen taulukon jossa pidetään
-     * kirjaa labyrinttiin liittyvistä AstarPiste-olioista, sekä
-     * aputietorakenteena käytettävän minimikeon ja listan jossa on jo tutkitut
-     * pisteet. Lisää piste-taulukkoon polun pisteisiin uudet pisteet
+     * Alustaa tarvittavat toiminnot. Lisää piste-taulukkoon polun pisteisiin uudet pisteet
      * alkutilassa, etäisyytenä alkuun ääretön ja loppuun arvioitu etäisyys,
      * joka tulee kaavalla käyttämällä sarakkeiden ja rivien indeksejä. Lisää
      * samalla luodut pisteet kekoon. Lopuksi asettaa alkupisteen dist-arvoksi
      * 0.
      */
     public final void alusta() {
-        this.pisteet = new AstarPiste[this.laby.length][this.laby[0].length];
-        this.keko = new AstarMinimiKeko(this.laby.length * this.laby[0].length);
-        this.tutkitut = new ArrayList();
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (this.laby[i][j] == 1) {

@@ -26,27 +26,26 @@ public class BellmanFord {
     private int solmumaara = 0;
 
     /**
-     * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon
-     * jakutsuu metodia joka alustaa tarvittavat toiminnot.
+     * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon,
+     * luo 2-ulotteisen taulukon jossa pidetään kirjaa labyrinttiin liittyvistä 
+     * Piste-olioista, ja kutsuu metodia joka alustaa tarvittavat toiminnot.
      * 
      * @param laby Labyrinttinä käytettävä taulukko
      */
     public BellmanFord(int[][] laby) {
         this.laby = laby;
+        this.pisteet = new Piste[this.laby.length][this.laby[0].length];        
         alusta();
     }
 
     /**
      * Alustaa tarvittavat toiminnot.
-     * Luo 2-ulotteisen taulukon jossa pidetään kirjaa labyrinttiin liittyvistä 
-     * Piste-olioista.
      * Lisää piste-taulukkoon polun pisteisiin uudet pisteet etäisyytenä ääretön,
      * ja kasvattaa solmumäärän laskuria jokaisen löytyneen pisteen kohdalla.
      * Lopuksi asettaa alkupisteen dist-arvoksi 0, ja kutsuu metodia joka hakee
      * pisteiden väliset kaaret.
      */
     public final void alusta() {
-        this.pisteet = new Piste[this.laby.length][this.laby[0].length];
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (this.laby[i][j] == 1) {
@@ -75,22 +74,29 @@ public class BellmanFord {
     }
     
     /**
-     * Hakee kaikki pisteestä lähtevät kaaret ja lisää ne kaarien listaan.
+     * Kutsuu kaikille pisteen u viereisille pisteille tarkistaJaLisaaKaari-
+     * metodia.
      * 
-     * @param u Piste josta lähtevät kaaret etsitään.
+     * @param u Piste jonka viereisille pisteille metodia kutsutaan
      */
     public void etsiLahtevatKaaret(Piste u){
-        if (onkoAlueella(u.getX(), u.getY() - 1)) {
-            this.kaaret.add(new Kaari(u, this.pisteet[u.getY() - 1][u.getX()]));
-        }
-        if (onkoAlueella(u.getX(), u.getY() + 1)) {
-            this.kaaret.add(new Kaari(u, this.pisteet[u.getY() + 1][u.getX()]));
-        }
-        if (onkoAlueella(u.getX() - 1, u.getY())) {
-            this.kaaret.add(new Kaari(u, this.pisteet[u.getY()][u.getX() - 1]));
-        }
-        if (onkoAlueella(u.getX() + 1, u.getY())) {
-            this.kaaret.add(new Kaari(u, this.pisteet[u.getY()][u.getX() + 1]));
+        tarkistaJaLisaaKaari(u, u.getX(), u.getY() - 1);
+        tarkistaJaLisaaKaari(u, u.getX(), u.getY() + 1);
+        tarkistaJaLisaaKaari(u, u.getX() - 1, u.getY());
+        tarkistaJaLisaaKaari(u, u.getX() + 1, u.getY());
+    }
+    
+    /**
+     * Tarkistaa onko pisteen u viereinen piste tutkittavalla alueella ja lisää
+     * kaarten listaan kaaren pisteestä u tähän viereiseen pisteeseen, jos on
+     * 
+     * @param u Piste josta lähtevät kaaret etsitään.
+     * @param x Pisteen u nyt tutkittavan viereisen pisteen x-koordinaatti
+     * @param y Pisteen u nyt tutkittavan viereisen pisteen y-koordinaatti
+     */
+    public void tarkistaJaLisaaKaari(Piste u, int x, int y) {
+        if (onkoAlueella(x, y)) {
+            this.kaaret.add(new Kaari(u, this.pisteet[y][x]));
         }
     }
 

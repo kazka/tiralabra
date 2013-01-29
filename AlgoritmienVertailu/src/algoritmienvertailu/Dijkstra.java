@@ -22,27 +22,27 @@ public class Dijkstra {
     private MinimiKeko keko;
 
     /**
-     * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon
-     * jakutsuu metodia joka alustaa tarvittavat toiminnot.
+     * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon.
+     * Luo 2-ulotteisen taulukon jossa pidetään kirjaa labyrinttiin liittyvistä 
+     * Piste-olioista, sekä aputietorakenteena käytettävän minimikeon.
+     * Kutsuu metodia joka alustaa tarvittavat toiminnot.
      * 
      * @param laby Labyrinttinä käytettävä taulukko
      */
     public Dijkstra(int[][] laby) {
         this.laby = laby;
+        this.pisteet = new Piste[this.laby.length][this.laby[0].length];
+        this.keko = new MinimiKeko(this.laby.length * this.laby[0].length);        
         alusta();
     }
 
     /**
      * Alustaa tarvittavat toiminnot.
-     * Luo 2-ulotteisen taulukon jossa pidetään kirjaa labyrinttiin liittyvistä 
-     * Piste-olioista, sekä aputietorakenteena käytettävän minimikeon.
      * Lisää piste-taulukkoon polun pisteisiin uudet pisteet alkutilassa,
      * eli värinä white ja etäisyytenä ääretön. Lisää samalla luodut pisteet kekoon.
      * Lopuksi asettaa alkupisteen dist-arvoksi 0.
      */
     public final void alusta() {
-        this.pisteet = new Piste[this.laby.length][this.laby[0].length];
-        this.keko = new MinimiKeko(this.laby.length * this.laby[0].length);
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (this.laby[i][j] == 1) {
