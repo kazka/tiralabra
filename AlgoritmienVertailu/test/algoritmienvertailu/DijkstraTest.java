@@ -162,4 +162,40 @@ public class DijkstraTest {
         djPieni.dijkstraa();
         assertFalse(djPieni.onkoAlueella(2, 2));
     }
+    
+    @Test
+    public void relaxToimiiOikeinKunDistYhtaSuurempi(){
+        Piste p1 = new Piste(0,0,"white",10);
+        Piste p2 = new Piste(0,1,"white",11);
+        Piste p3 = new Piste(1,0,"white",15);
+        p2.setEdellinen(p3);
+        djIso.relax(p1,p2);
+        
+        assertEquals(11, p2.getDist());
+        assertEquals(p3, p2.getEdellinen());
+    }
+    
+    @Test
+    public void relaxToimiiOikeinKunDistUseammanSuurempi(){
+        Piste p1 = new Piste(0,0,"white",10);
+        Piste p2 = new Piste(0,1,"white",12);
+        Piste p3 = new Piste(1,0,"white",15);
+        p1.setEdellinen(p3);
+        djIso.relax(p1,p2);
+        
+        assertEquals(11, p2.getDist());
+        assertEquals(p1, p2.getEdellinen());
+    }    
+    
+    @Test
+    public void relaxToimiiOikeinKunMolempienDistAareton(){
+        Piste p1 = new Piste(0,0,Integer.MAX_VALUE);
+        Piste p2 = new Piste(0,1,Integer.MAX_VALUE);
+        Piste p3 = new Piste(1,0,15);
+        p2.setEdellinen(p3);
+        djIso.relax(p1,p2);
+        
+        assertEquals(Integer.MAX_VALUE, p2.getDist());
+        assertEquals(p3, p2.getEdellinen());
+    }      
 }

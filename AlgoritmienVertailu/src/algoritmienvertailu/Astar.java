@@ -113,7 +113,7 @@ public class Astar {
      * @param v Pisteen u vieressä oleva piste johon etäisyyttä tutkitaan
      */
     public void relax(AstarPiste u, AstarPiste v) {
-        if (v.getDist() >= u.getDist() + 1) {
+        if (v.getDist() > u.getDist() + 1) {
             v.setDist(u.getDist() + 1);
             this.keko.decKey(v);
             v.setEdellinen(u);

@@ -107,8 +107,12 @@ public class Dijkstra {
      * @param v Pisteen u vieressä oleva piste johon etäisyyttä tutkitaan
      */
     public void relax(Piste u, Piste v) {
-        if (v.getDist() > u.getDist() + 1) {
-            v.setDist(u.getDist() + 1);
+        int udist = u.getDist() + 1;
+        if (u.getDist() == Integer.MAX_VALUE){
+            udist = u.getDist();
+        }        
+        if (v.getDist() > udist) {
+            v.setDist(udist);
             this.keko.decKey(v);
             v.setEdellinen(u);
         }

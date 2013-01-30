@@ -91,4 +91,28 @@ public class AstarTest {
         astIso.astaraa();
         assertEquals(8, astIso.getMaalipiste().getDist());
     }
+    
+    @Test
+    public void relaxToimiiOikeinKunDistYhtaSuurempi(){
+        AstarPiste p1 = new AstarPiste(0,0,"white",10,10);
+        AstarPiste p2 = new AstarPiste(0,1,"white",11,20);
+        AstarPiste p3 = new AstarPiste(1,0,"white",15,30);
+        p2.setEdellinen(p3);
+        astIso.relax(p1,p2);
+        
+        assertEquals(11, p2.getDist());
+        assertEquals(p3, p2.getEdellinen());
+    }
+    
+    @Test
+    public void relaxToimiiOikeinKunDistUseammanSuurempi(){
+        AstarPiste p1 = new AstarPiste(0,0,"white",10,10);
+        AstarPiste p2 = new AstarPiste(0,1,"white",12,20);
+        AstarPiste p3 = new AstarPiste(1,0,"white",15,30);
+        p1.setEdellinen(p3);
+        astIso.relax(p1,p2);
+        
+        assertEquals(11, p2.getDist());
+        assertEquals(p1, p2.getEdellinen());
+    }     
 }
