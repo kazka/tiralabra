@@ -31,7 +31,7 @@ public class Piste implements Comparable<Piste> {
     private Piste edellinen;
     
     /**
-     * Dijkstran (ja A starin) käyttämä konstruktori
+     * Dijkstran (ja osittain A starin) käyttämä konstruktori
      * 
      * @param x Sarake jolla piste sijaitsee
      * @param y Rivi jolla piste sijaitsee

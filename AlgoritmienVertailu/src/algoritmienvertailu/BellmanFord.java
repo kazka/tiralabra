@@ -1,6 +1,5 @@
 package algoritmienvertailu;
 
-import aputietorakenteet.MinimiKeko;
 import java.util.ArrayList;
 
 /**
@@ -172,31 +171,35 @@ public class BellmanFord {
             }
             System.out.println("");
         }
-        
         tulostaPolku();
     }
     
     /**
      * Tulostetaan lyhin polku jota pitkin päästiin alkupisteestä maaliin.
      */
-    public void tulostaPolku(){
-        Piste maali = getMaalipiste();
-        
-        if (maali.getDist() == Integer.MAX_VALUE){
-            System.out.println("maalia ei saavutettu");
-            return;
-        }
+    public void tulostaPolku(){     
+        if (!saavutettiinkoMaali())return;
         
         System.out.println("Lyhin polku maalista lähtien:");
-        
-        System.out.print(maali.getX() + "," + maali.getY() + "...");
-        Piste edellinen = maali.getEdellinen();
+        Piste edellinen = getMaalipiste();
         while (edellinen.getEdellinen() != null) {
             System.out.print(edellinen.getX() + "," + edellinen.getY() + "...");
             edellinen = edellinen.getEdellinen();
+        }  
+        System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + getMaalipiste().getDist());
+    }
+    
+    /**
+     * Lopussa kutsuttava metodi joka tarkistaa saavutettiinko maalipiste.
+     * 
+     * @return false jos maalia ei saavutettu, muuten true
+     */
+    public boolean saavutettiinkoMaali() {
+        if (getMaalipiste().getDist() == Integer.MAX_VALUE) {
+            System.out.println("maalia ei saavutettu");
+            return false;
         }
-        
-        System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + maali.getDist());
+        return true;
     }
     
     /**
