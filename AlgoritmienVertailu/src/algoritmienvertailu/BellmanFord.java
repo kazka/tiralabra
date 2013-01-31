@@ -102,8 +102,8 @@ public class BellmanFord {
     /**
      * Päämetodi jolla bellman-fordia kutsutaan.
      * Käy läpi kaikki kaaret solmujen määrän verran kertoja ja kutsuu kaarille
-     * relax-metodia. Tämän jälkeen käy vielä läpi kaikki kaaret ja ilmoittaa jos
-     * löytyi negatiivisen painoinen sykli.
+     * relax-metodia. Tämän jälkeen kutsuu metodia joka etsii 
+     * negatiivisen painoisia syklejä.
      */
     public void bellman() {
         for (int i = 1; i <= this.solmumaara-1; i++){
@@ -112,11 +112,19 @@ public class BellmanFord {
                 relax(uv.getLahde(), uv.getKohde());
             }
         }   
+        etsiNegatiivisetSyklit();
+    }
+    
+    /**
+     * Käy läpi kaikki kaaret ja ilmoittaa jos
+     * löytyi negatiivisen painoinen sykli.
+     */
+    public void etsiNegatiivisetSyklit(){
         for (Kaari uv : this.kaaret) {
             if (uv.getLahde().getDist() + 1 < uv.getKohde().getDist()){
                 System.out.println("löytyi negatiivinen sykli");
             }
-        }            
+        } 
     }
 
     /**
