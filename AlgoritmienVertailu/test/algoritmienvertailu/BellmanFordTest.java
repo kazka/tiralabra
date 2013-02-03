@@ -116,8 +116,8 @@ public class BellmanFordTest {
     
     @Test
     public void haeKaaretHakeeOikeanMaaranKaaria(){
-        assertEquals(4, bfMaaliton.getKaaret().size());
-        assertEquals(16, bfPieni.getKaaret().size());
+        assertEquals(4, bfMaaliton.getKaaret().getSolmumaara());
+        assertEquals(16, bfPieni.getKaaret().getSolmumaara());
     }
     
     @Test

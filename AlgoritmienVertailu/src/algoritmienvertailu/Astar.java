@@ -1,6 +1,7 @@
 package algoritmienvertailu;
 
 import aputietorakenteet.AstarMinimiKeko;
+import aputietorakenteet.LinkitettyLista;
 import java.util.ArrayList;
 
 /**
@@ -22,9 +23,9 @@ public class Astar {
      */
     private AstarMinimiKeko keko;
     /**
-     * ArrayList jossa kaikki tähän mennessä tutkitut pisteet
+     * Linkitetty lista jossa kaikki tähän mennessä tutkitut pisteet
      */
-    private ArrayList<AstarPiste> tutkitut;
+    private LinkitettyLista tutkitut;
 
     /**
      * Konstruktori, asettaa labyrinttinä käytettävän 2-ulotteisen taulukon.
@@ -39,7 +40,7 @@ public class Astar {
         this.laby = laby;
         this.pisteet = new AstarPiste[this.laby.length][this.laby[0].length];
         this.keko = new AstarMinimiKeko(this.laby.length * this.laby[0].length);        
-        this.tutkitut = new ArrayList();       
+        this.tutkitut = new LinkitettyLista();       
         alusta();
     }
 
@@ -225,7 +226,7 @@ public class Astar {
      *
      * @return tutkittujen pisteiden lista
      */
-    public ArrayList<AstarPiste> getTutkitut() {
+    public LinkitettyLista getTutkitut() {
         return tutkitut;
     }
 }

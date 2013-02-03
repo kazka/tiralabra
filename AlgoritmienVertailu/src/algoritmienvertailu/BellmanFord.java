@@ -1,5 +1,7 @@
 package algoritmienvertailu;
 
+import aputietorakenteet.LinkitettyLista;
+import aputietorakenteet.Listasolmu;
 import java.util.ArrayList;
 
 /**
@@ -16,9 +18,9 @@ public class BellmanFord {
      */
     private Piste[][] pisteet;
     /**
-     * Lista jossa on kaikki labyrintin pisteiden väliset kaaret
+     * Linkitetty lista jossa on kaikki labyrintin pisteiden väliset kaaret
      */
-    private ArrayList<Kaari> kaaret;
+    private LinkitettyLista kaaret;
     /**
      * Labyrintin polkujen pisteiden määrä yhteensä
      */
@@ -58,11 +60,11 @@ public class BellmanFord {
     }
     
     /**
-     * Kutsuu jokaiselle löytyneelle pisteelle metodia joka hakee kyseisestä pisteestä
-     * lähtevät kaaret.
+     * Luo kaarien listan ja kutsuu jokaiselle löytyneelle pisteelle metodia 
+     * joka hakee kyseisestä pisteestä lähtevät kaaret.
      */
     public void haeKaaret(){
-        this.kaaret = new ArrayList<Kaari>();
+        this.kaaret = new LinkitettyLista();
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (this.laby[i][j] == 1) {
@@ -107,8 +109,10 @@ public class BellmanFord {
      */
     public void bellman() {
         for (int i = 1; i <= this.solmumaara-1; i++){
-            for (Kaari uv : this.kaaret) {
-            //    System.out.println(uv.getLahde().getX() + " " + uv.getLahde().getY() + " " + uv.getKohde().getX() + " " + uv.getKohde().getY());
+            Listasolmu tutkittava = this.kaaret.getAlkusolmu();
+            while (tutkittava.getNext() != null) {
+                tutkittava = tutkittava.getNext();
+                Kaari uv = (Kaari) tutkittava.getData();
                 relax(uv.getLahde(), uv.getKohde());
             }
         }   
@@ -120,7 +124,10 @@ public class BellmanFord {
      * löytyi negatiivisen painoinen sykli.
      */
     public void etsiNegatiivisetSyklit(){
-        for (Kaari uv : this.kaaret) {
+        Listasolmu tutkittava = this.kaaret.getAlkusolmu();
+        while (tutkittava.getNext() != null) {
+            tutkittava = tutkittava.getNext();
+            Kaari uv = (Kaari) tutkittava.getData();
             if (uv.getLahde().getDist() + 1 < uv.getKohde().getDist()){
                 System.out.println("löytyi negatiivinen sykli");
             }
@@ -243,7 +250,7 @@ public class BellmanFord {
      *
      * @return lista kaarista
      */
-    public ArrayList<Kaari> getKaaret() {
+    public LinkitettyLista getKaaret() {
         return kaaret;
     }
 
