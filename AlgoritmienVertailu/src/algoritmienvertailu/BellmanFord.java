@@ -128,8 +128,8 @@ public class BellmanFord {
         while (tutkittava.getNext() != null) {
             tutkittava = tutkittava.getNext();
             Kaari uv = (Kaari) tutkittava.getData();
-            if (uv.getLahde().getDist() + 1 < uv.getKohde().getDist()){
-                System.out.println("löytyi negatiivinen sykli");
+            if (uv.getLahde().getDist() + 1 != Integer.MIN_VALUE && uv.getLahde().getDist() + 1 < uv.getKohde().getDist()){
+                System.out.println("löytyi negatiivinen sykli " + uv.getLahde().getX() + "," + uv.getLahde().getY() + "," + uv.getKohde().getX() + "," + uv.getKohde().getY());
             }
         } 
     }
