@@ -170,6 +170,7 @@ public class BellmanFord {
 
     /**
      * Tulostetaan labyrintti ja polun pisteisiin liittyvät dist-arvot.
+     * Liian pitkä metodi, ei tietoa miten tätä saisi vielä lyhennettyä.
      */
     public void tulosta() {
         for (int i = 0; i < this.laby.length; i++) {
@@ -201,7 +202,7 @@ public class BellmanFord {
             System.out.print(edellinen.getX() + "," + edellinen.getY() + "...");
             edellinen = edellinen.getEdellinen();
         }  
-        System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + getMaalipiste().getDist());
+        System.out.println(edellinen.getX() + "," + edellinen.getY() + " \nPituus: " + getMaalipiste().getDist());
     }
     
     /**

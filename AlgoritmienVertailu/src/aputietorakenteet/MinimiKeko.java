@@ -106,6 +106,7 @@ public class MinimiKeko {
     /**
      * Varmistaa että kekoehto pysyy voimassa.
      * Kutsutaan kun keosta poistetaan piste jolla pienin dist-arvo.
+     * Liian pitkä metodi, ei tietoa miten tätä saisi vielä lyhennettyä.
      * 
      * @param index Indeksi josta alaspäin (taulukossa loppuun päin) heapify suoritetaan
      */

@@ -50,6 +50,7 @@ public class Astar {
      * joka tulee kaavalla käyttämällä sarakkeiden ja rivien indeksejä. Lisää
      * samalla luodut pisteet kekoon. Lopuksi asettaa alkupisteen dist-arvoksi
      * 0.
+     * Liian pitkä metodi, ei tietoa miten tätä saisi vielä lyhennettyä.
      */
     public final void alusta() {
         for (int i = 0; i < this.laby.length; i++) {
@@ -114,8 +115,12 @@ public class Astar {
      * @param v Pisteen u vieressä oleva piste johon etäisyyttä tutkitaan
      */
     public void relax(AstarPiste u, AstarPiste v) {
-        if (v.getDist() > u.getDist() + 1) {
-            v.setDist(u.getDist() + 1);
+        int udist = u.getDist() + 1;
+        if (u.getDist() == Integer.MAX_VALUE){
+            udist = u.getDist();
+        }        
+        if (v.getDist() > udist) {
+            v.setDist(udist);
             this.keko.decKey(v);
             v.setEdellinen(u);
         }
@@ -137,6 +142,7 @@ public class Astar {
 
     /**
      * Tulostetaan labyrintti ja polun pisteisiin liittyvät dist-arvot.
+     * Liian pitkä metodi, ei tietoa miten tätä saisi vielä lyhennettyä.
      */
     public void tulosta() {
         for (int i = 0; i < this.laby.length; i++) {
@@ -168,7 +174,7 @@ public class Astar {
             System.out.print(edellinen.getX() + "," + edellinen.getY() + "...");
             edellinen = edellinen.getEdellinen();
         }
-        System.out.println(edellinen.getX() + "," + edellinen.getY() + " pituus: " + getMaalipiste().getDist());
+        System.out.println(edellinen.getX() + "," + edellinen.getY() + " \nPituus: " + getMaalipiste().getDist());
     }
     
     /**
