@@ -101,7 +101,7 @@ public class AlgoritmienVertailu {
     public String kysyKaytettavaAlgoritmi(){
         String valittu = "";
         while(!(valittu.equals("dj") || valittu.equals("ast") || valittu.equals("bf"))){
-            System.out.println("Aloita valitsemalla algoritmi, vaihtoehdot: dj (Dijkstra), ast (A*), bf (Bellman-Ford), exit (lopetus)");
+            System.out.println("Aloita valitsemalla algoritmi, vaihtoehdot: dj (Dijkstra), ast (A*), bf (Bellman-Ford), exit (lopetus *ei toimi vielä*)");
             valittu = lukija.nextLine();
         }
         return valittu;
