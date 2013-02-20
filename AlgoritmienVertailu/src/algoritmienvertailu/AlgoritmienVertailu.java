@@ -13,65 +13,21 @@ public class AlgoritmienVertailu {
      * Lukija
      */
     private Scanner lukija;
-    /**
-     * 5x5 kokoinen testilabyrintti 2-ulotteisena taulukkona
-     */
-    static int[][] labyrintti5x5 = new int[][] 
-       {{1, 1, 0, 0, 0},
-        {0, 1, 0, 0, 0},
-        {1, 1, 1, 0, 0},
-        {1, 0, 1, 1, 1},   
-        {1, 1, 1, 0, 1}}; 
     
     /**
-     * 10x10 kokoinen testilabyrintti 2-ulotteisena taulukkona
+     * Tyhjä/seinätön labyrintti
      */
-    static int[][] labyrintti10x10 = new int[][] 
-       {{1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 1, 0, 0, 1, 1, 1, 1, 0, 0},
-        {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1},   
-        {1, 1, 1, 0, 1, 1, 1, 1, 1, 1},
-        {0, 1, 0, 0, 1, 0, 0, 1, 0, 1},
-        {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1},   
-        {1, 0, 1, 0, 1, 0, 0, 0, 0, 1},      
-        {1, 1, 1, 0, 1, 1, 1, 1, 1, 1}}; 
-    
-    /**
-     * 30x30 kokoinen testilabyrintti 2-ulotteisena taulukkona
-     */
-    static int[][] labyrintti30x30 = new int[][] 
-       {{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0},
-        {0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0},
-        {0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0},
-        {0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},   
-        {0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-        {0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-        {1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0},
-        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0},
-        {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0},
-        {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-        {1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},   
-        {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-        {0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-        {0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1},   
-        {0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-        {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},   
-        {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
-        {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0},
-        {0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-        {0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0},
-        {0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},   
-        {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};     
+    static int[][] tyhjaLaby = new int[][] 
+       {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},   
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},   
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},      
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};   
     
     /**
      * Konstruktori
@@ -88,9 +44,12 @@ public class AlgoritmienVertailu {
     public void start(){
         System.out.println("Tervetuloa testaamaan algoritmeja :>");
         this.lukija = new Scanner(System.in);
-        String valittu = kysyKaytettavaAlgoritmi();
         int[][] laby = kysyLabyrintinKoko();
-        haeValittuAlgoritmi(valittu, laby);     
+        String valittu = kysyKaytettavaAlgoritmi();
+        while (!valittu.equals("exit")){
+            haeValittuAlgoritmi(valittu, laby);  
+            valittu = kysyKaytettavaAlgoritmi();
+        }
     }
     
     /**
@@ -100,8 +59,9 @@ public class AlgoritmienVertailu {
      */
     public String kysyKaytettavaAlgoritmi(){
         String valittu = "";
-        while(!(valittu.equals("dj") || valittu.equals("ast") || valittu.equals("bf"))){
-            System.out.println("Aloita valitsemalla algoritmi, vaihtoehdot: dj (Dijkstra), ast (A*), bf (Bellman-Ford), exit (lopetus *ei toimi vielä*)");
+        while(!(valittu.equals("dj") || valittu.equals("ast") || valittu.equals("bf") || valittu.equals("exit"))){
+            System.out.println("Mitä algoritmia testataan?");
+            System.out.println("Vaihtoehdot: dj (Dijkstra), ast (A*), bf (Bellman-Ford), exit (lopetus)");
             valittu = lukija.nextLine();
         }
         return valittu;
@@ -114,9 +74,9 @@ public class AlgoritmienVertailu {
      */
     public int[][] kysyLabyrintinKoko(){
         String koko = "";
-        while(!(koko.equals("pieni") || koko.equals("keski") || koko.equals("iso"))){
+        while(!(koko.equals("pieni") || koko.equals("keski") || koko.equals("iso") || koko.equals("tyhja"))){
             System.out.println("Minkä kokoisella labyrintilla testataan?");
-            System.out.println("Vaihtoehdot: pieni (10x10 ruutua), keski (100x100 ruutua), iso (1000x1000 ruutua)");
+            System.out.println("Vaihtoehdot: pieni (10x10 ruutua), keski (100x100 ruutua), iso (1000x1000 ruutua), tyhja (100x100 ruutua, seinätön)");
             koko = lukija.nextLine();
         }
         return generoiLabyrintti(koko);
@@ -131,7 +91,9 @@ public class AlgoritmienVertailu {
      */
     public int[][] generoiLabyrintti(String koko){
         int[][] laby;
-        if (koko.equals("pieni")){
+        if (koko.equals("tyhja")){
+            return generoiTyhjaLaby();
+        } else if (koko.equals("pieni")){
             laby = new int[10][10];
         } else if (koko.equals("keski")){
             laby = new int[100][100];
@@ -139,6 +101,16 @@ public class AlgoritmienVertailu {
             laby = new int[500][500];
         }
         generoiSeinat(laby);
+        return laby;
+    }
+    
+    public int[][] generoiTyhjaLaby(){
+        int[][] laby = new int[300][300];
+        for (int i = 0; i < laby.length; i++) {
+            for (int j = 0; j < laby[0].length; j++) {
+                laby[i][j] = 1;
+            }
+        }
         return laby;
     }
     
@@ -187,7 +159,7 @@ public class AlgoritmienVertailu {
         long lopetusaika = System.currentTimeMillis();
         System.out.println("~Dijkstran algoritmi~");
         dj.tulosta();
-        System.out.println("Aikaa kului (ms): " + (lopetusaika - aloitusaika));
+        System.out.println("Aikaa kului (ms): " + (lopetusaika - aloitusaika) + "\n");
     }
     
     /**
@@ -202,7 +174,7 @@ public class AlgoritmienVertailu {
         long lopetusaika = System.currentTimeMillis();
         System.out.println("~A* algoritmi~");
         ast.tulosta();
-        System.out.println("Aikaa kului (ms): " + (lopetusaika - aloitusaika));
+        System.out.println("Aikaa kului (ms): " + (lopetusaika - aloitusaika) + "\n");
     }   
     
     /**
@@ -217,7 +189,7 @@ public class AlgoritmienVertailu {
         long lopetusaika = System.currentTimeMillis();
         System.out.println("~Bellman-Fordin algoritmi~");
         bf.tulosta();
-        System.out.println("Aikaa kului (ms): " + (lopetusaika - aloitusaika));
+        System.out.println("Aikaa kului (ms): " + (lopetusaika - aloitusaika) + "\n");
     } 
    
 }
