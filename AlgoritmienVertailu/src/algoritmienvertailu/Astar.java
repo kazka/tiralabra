@@ -48,9 +48,7 @@ public class Astar {
      * Alustaa tarvittavat toiminnot. Lisää piste-taulukkoon polun pisteisiin uudet pisteet
      * alkutilassa, etäisyytenä alkuun ääretön ja loppuun arvioitu etäisyys,
      * joka tulee kaavalla käyttämällä sarakkeiden ja rivien indeksejä. Lisää
-     * samalla luodut pisteet kekoon. Lopuksi asettaa alkupisteen dist-arvoksi
-     * 0.
-     * Liian pitkä metodi, ei tietoa miten tätä saisi vielä lyhennettyä.
+     * samalla luodut pisteet kekoon.
      */
     public final void alusta() {
         for (int i = 0; i < this.laby.length; i++) {
@@ -63,7 +61,6 @@ public class Astar {
             }
         }
         this.pisteet[0][0].setDist(0);
-        getMaalipiste().setDistLoppuun(0);
     }
 
     /**

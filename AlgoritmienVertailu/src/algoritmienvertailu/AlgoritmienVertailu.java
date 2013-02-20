@@ -105,7 +105,7 @@ public class AlgoritmienVertailu {
     }
     
     public int[][] generoiTyhjaLaby(){
-        int[][] laby = new int[300][300];
+        int[][] laby = new int[200][200];
         for (int i = 0; i < laby.length; i++) {
             for (int j = 0; j < laby[0].length; j++) {
                 laby[i][j] = 1;
