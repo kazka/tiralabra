@@ -141,12 +141,12 @@ public class Dijkstra {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (laby[i][j] == 1) {
                     if (this.pisteet[i][j].getDist() == Integer.MAX_VALUE) {
-                        System.out.print("x ");
+                        System.out.print(String.format("%-4s", "x"));
                     } else {
-                        System.out.print(this.pisteet[i][j].getDist() + " ");
+                        System.out.print(String.format("%-4s", this.pisteet[i][j].getDist()));
                     }
                 } else {
-                    System.out.print("# ");
+                    System.out.print(String.format("%-4s", "#"));
                 }
             }
             System.out.println("");
