@@ -116,11 +116,19 @@ public class MinimiKekoTest {
     public boolean onkoVoimassa(Piste[] kekotaulukko) {
         boolean voimassa = true;
         int i = 0;
-        while (kekotaulukko[2 * i + 2] != null){
+        while (kekotaulukko[2 * i + 2] != null || kekotaulukko[2 * i + 1] != null){
             int oikea = 2 * i + 2;
             int vasen = 2 * i + 1;
-            if (kekotaulukko[i].getDist() > kekotaulukko[oikea].getDist() || kekotaulukko[i].getDist() > kekotaulukko[vasen].getDist()){
-                voimassa = false;
+            if (kekotaulukko[oikea] == null){
+                if (kekotaulukko[i].getDist() > kekotaulukko[vasen].getDist()){
+                    voimassa = false;
+                    break;
+                }
+            } else {
+                if (kekotaulukko[i].getDist() > kekotaulukko[oikea].getDist() || kekotaulukko[i].getDist() > kekotaulukko[vasen].getDist()){
+                    voimassa = false;
+                    break;
+                }
             }
             i++;
         }

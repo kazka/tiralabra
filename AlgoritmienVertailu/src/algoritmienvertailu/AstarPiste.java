@@ -12,20 +12,24 @@ public class AstarPiste extends Piste {
      * Piste jonka kautta pisteeseen tultiin
      */
     private AstarPiste edellinen;
+    /**
+     * Alkuun + loppuun etäisyyksien summa
+     */
+    private int alkuunPlusLoppuun;
     
     /**
      * Konstruktori
      * 
      * @param x Sarake jolla piste sijaitsee
      * @param y Rivi jolla piste sijaitsee
-     * @param color Pisteen väri, aluksi kaikilla "white"
      * @param dist Pisteen etäisyys aloituspisteestä, aluksi kaikilla paitsi
      * aloituspisteellä Integer.MAX_VALUE
      * @param distLoppuun Arvio pisteen etäisyydestä maalipisteeseen
      */
-    public AstarPiste(int x, int y, String color, int dist, int distLoppuun) {
-        super(x, y, color, dist);
+    public AstarPiste(int x, int y, int dist, int distLoppuun) {
+        super(x, y, "white", dist);
         this.distLoppuun = distLoppuun;
+        paivitaAlkuunPlusLoppuun();
     }
     
     /**
@@ -34,11 +38,11 @@ public class AstarPiste extends Piste {
      * 
      * @return Etäisyyksien summa alkuun + loppuun
      */
-    public int getAlkuunPlusLoppuun(){
+    public final void paivitaAlkuunPlusLoppuun(){
         if (super.getDist() == Integer.MAX_VALUE){
-            return Integer.MAX_VALUE;
+            this.alkuunPlusLoppuun = Integer.MAX_VALUE;
         } else {
-            return this.distLoppuun + super.getDist();
+            this.alkuunPlusLoppuun = this.distLoppuun + super.getDist();
         }
     }
 
@@ -50,6 +54,15 @@ public class AstarPiste extends Piste {
     public int getDistLoppuun() {
         return distLoppuun;
     }
+    
+    /**
+     * Palauttaa arvion pisteen etäisyydestä maalipisteeseen
+     *
+     * @return arvio pisteen etäisyydestä maalipisteeseen
+     */
+    public int getAlkuunPlusLoppuun() {
+        return alkuunPlusLoppuun;
+    }    
 
     /**
      * Asettaa pisteelle arvion etäisyydestä maalipisteeseen

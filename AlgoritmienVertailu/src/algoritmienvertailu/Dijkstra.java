@@ -40,7 +40,6 @@ public class Dijkstra {
      * Alustaa tarvittavat toiminnot.
      * Lisää piste-taulukkoon polun pisteisiin uudet pisteet alkutilassa,
      * eli värinä white ja etäisyytenä ääretön. Lisää samalla luodut pisteet kekoon.
-     * Lopuksi asettaa alkupisteen dist-arvoksi 0.
      */
     public final void alusta() {
         for (int i = 0; i < this.laby.length; i++) {
@@ -51,7 +50,20 @@ public class Dijkstra {
                 }
             }
         }
-        this.pisteet[0][0].setDist(0);
+        asetaAlkuDist();
+    }
+    
+    /**
+     * Asettaa alkupisteen dist-arvoksi 0.
+     * Valitsee alkupisteen sen perusteella, onko käytössä normaali vai tyhjä labyrintti.
+     */
+    public void asetaAlkuDist(){
+        if (this.pisteet.length == 200){
+            this.pisteet[0][199].setDist(0);
+            this.keko.decKey(this.pisteet[0][199]);
+        } else {
+            this.pisteet[0][0].setDist(0);
+        }
     }
 
     /**

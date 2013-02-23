@@ -33,9 +33,7 @@ public class AstarMinimiKeko {
      * @return piste jolla pienin dist-arvo
      */
     public AstarPiste remove() {
-        if(isEmpty()) {
-            System.out.println("keko on tyhjä");
-        }
+        tarkistaTyhjyys();
  
         AstarPiste min = taulukko[0];
         taulukko[0] = taulukko[pisteidenMaara - 1];
@@ -43,6 +41,15 @@ public class AstarMinimiKeko {
             heapifyAlaspain(0);
         }
         return min;
+    }
+    
+    /** 
+     * Tarkistaa onko keko tyhjä, jos on niin tulostaa siitä ilmoituksen
+     */
+    public void tarkistaTyhjyys() {
+        if(isEmpty()) {
+            System.out.println("keko on tyhjä");
+        }
     }
     
     /** 
@@ -89,7 +96,6 @@ public class AstarMinimiKeko {
     /**
      * Varmistaa että kekoehto pysyy voimassa.
      * Kutsutaan kun keosta poistetaan piste jolla pienin alkuun + loppuun -arvo.
-     * Liian pitkä metodi, ei tietoa miten tätä saisi vielä lyhennettyä.
      * 
      * @param index Indeksi josta alaspäin (taulukossa loppuun päin) heapify suoritetaan
      */
@@ -159,6 +165,15 @@ public class AstarMinimiKeko {
             }
         }
     }
+    
+//    public boolean contains(AstarPiste p){
+//        for (int i = 0; i <= this.pisteidenMaara; i++){
+//            if (taulukko[i].equals(p)){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
  
     /** 
      * Apumetodi jolla vaihdetaan kahden pisteen paikkaa keossa 

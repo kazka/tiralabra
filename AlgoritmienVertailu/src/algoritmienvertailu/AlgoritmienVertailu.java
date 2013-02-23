@@ -15,21 +15,6 @@ public class AlgoritmienVertailu {
     private Scanner lukija;
     
     /**
-     * Tyhjä/seinätön labyrintti
-     */
-    static int[][] tyhjaLaby = new int[][] 
-       {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},   
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},   
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},      
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};   
-    
-    /**
      * Konstruktori
      */
     public AlgoritmienVertailu() {
@@ -76,7 +61,7 @@ public class AlgoritmienVertailu {
         String koko = "";
         while(!(koko.equals("pieni") || koko.equals("keski") || koko.equals("iso") || koko.equals("tyhja"))){
             System.out.println("Minkä kokoisella labyrintilla testataan?");
-            System.out.println("Vaihtoehdot: pieni (10x10 ruutua), keski (100x100 ruutua), iso (500x500 ruutua), tyhja (100x100 ruutua, seinätön)");
+            System.out.println("Vaihtoehdot: pieni (20x20 ruutua), keski (100x100 ruutua), iso (400x400 ruutua), tyhja (200x200 ruutua, seinätön)");
             koko = lukija.nextLine();
         }
         return generoiLabyrintti(koko);
@@ -94,11 +79,11 @@ public class AlgoritmienVertailu {
         if (koko.equals("tyhja")){
             return generoiTyhjaLaby();
         } else if (koko.equals("pieni")){
-            laby = new int[10][10];
+            laby = new int[20][20];
         } else if (koko.equals("keski")){
             laby = new int[100][100];
         } else {
-            laby = new int[500][500];
+            laby = new int[400][400];
         }
         generoiSeinat(laby);
         return laby;

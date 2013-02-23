@@ -2,7 +2,6 @@ package algoritmienvertailu;
 
 import aputietorakenteet.AstarMinimiKeko;
 import aputietorakenteet.LinkitettyLista;
-import java.util.ArrayList;
 
 /**
  * A* algoritmi. Etsii labyrintistä lyhimmän polun aloituspisteestä maaliin
@@ -55,14 +54,28 @@ public class Astar {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (this.laby[i][j] == 1) {
                     int distLoppuunArvio = Math.abs((i - (this.laby.length - 1)) + (j - (this.laby[0].length - 1)));
-                    this.pisteet[i][j] = new AstarPiste(j, i, "white", Integer.MAX_VALUE, distLoppuunArvio);
+                    this.pisteet[i][j] = new AstarPiste(j, i, Integer.MAX_VALUE, distLoppuunArvio);
                     this.keko.add(this.pisteet[i][j]);
                 }
             }
         }
-        this.pisteet[0][0].setDist(0);
+        asetaAlkuDist();
     }
 
+    /**
+     * Asettaa alkupisteen dist-arvoksi 0.
+     * Valitsee alkupisteen sen perusteella, onko käytössä normaali vai tyhjä labyrintti.
+     */
+    public void asetaAlkuDist(){
+        if (this.pisteet.length == 200){
+            this.pisteet[0][199].setDist(0);
+            this.pisteet[0][199].paivitaAlkuunPlusLoppuun();
+            this.keko.decKey(this.pisteet[0][199]);
+        } else {
+            this.pisteet[0][0].setDist(0);
+        }
+    }    
+    
     /**
      * Päämetodi jolla A staria kutsutaan. Jatketaan kunnes maalipiste lisätään
      * kekoon: Haetaan ensin keosta piste jolla on pienin arvio etäisyydestä
@@ -76,7 +89,7 @@ public class Astar {
             tutkiViereiset(u);
         }
     }
-
+    
     /**
      * Metodi jolla kutsutaan jokaiselle pisteen u viereiselle pisteelle
      * tarkistaJaRelaxoi-metodia.
@@ -84,10 +97,10 @@ public class Astar {
      * @param u Piste jonka viereiset pisteet tutkitaan
      */
     public void tutkiViereiset(AstarPiste u) {
-        tarkistaJaRelaxoi(u, u.getX(), u.getY() - 1);
         tarkistaJaRelaxoi(u, u.getX(), u.getY() + 1);
-        tarkistaJaRelaxoi(u, u.getX() - 1, u.getY());
         tarkistaJaRelaxoi(u, u.getX() + 1, u.getY());
+        tarkistaJaRelaxoi(u, u.getX() - 1, u.getY());
+        tarkistaJaRelaxoi(u, u.getX(), u.getY() - 1);
     }
     
     /**
@@ -118,6 +131,7 @@ public class Astar {
         }        
         if (v.getDist() > udist) {
             v.setDist(udist);
+            v.paivitaAlkuunPlusLoppuun();
             this.keko.decKey(v);
             v.setEdellinen(u);
         }
@@ -146,12 +160,12 @@ public class Astar {
             for (int j = 0; j < this.laby[0].length; j++) {
                 if (laby[i][j] == 1) {
                     if (this.pisteet[i][j].getDist() == Integer.MAX_VALUE) {
-                        System.out.print(String.format("%-3s", "x"));
+                        System.out.print(String.format("%-4s", "x"));
                     } else {
-                        System.out.print(String.format("%-3s", this.pisteet[i][j].getDist()));
+                        System.out.print(String.format("%-4s", this.pisteet[i][j].getDist()));
                     }
                 } else {
-                    System.out.print(String.format("%-3s", "#"));
+                    System.out.print(String.format("%-4s", "#"));
                 }
             }
             System.out.println("");

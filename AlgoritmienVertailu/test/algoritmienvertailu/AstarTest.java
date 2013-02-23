@@ -94,9 +94,9 @@ public class AstarTest {
     
     @Test
     public void relaxToimiiOikeinKunDistYhtaSuurempi(){
-        AstarPiste p1 = new AstarPiste(0,0,"white",10,10);
-        AstarPiste p2 = new AstarPiste(0,1,"white",11,20);
-        AstarPiste p3 = new AstarPiste(1,0,"white",15,30);
+        AstarPiste p1 = new AstarPiste(0,0,10,10);
+        AstarPiste p2 = new AstarPiste(0,1,11,20);
+        AstarPiste p3 = new AstarPiste(1,0,15,30);
         p2.setEdellinen(p3);
         astIso.relax(p1,p2);
         
@@ -106,9 +106,9 @@ public class AstarTest {
     
     @Test
     public void relaxToimiiOikeinKunDistUseammanSuurempi(){
-        AstarPiste p1 = new AstarPiste(0,0,"white",10,10);
-        AstarPiste p2 = new AstarPiste(0,1,"white",12,20);
-        AstarPiste p3 = new AstarPiste(1,0,"white",15,30);
+        AstarPiste p1 = new AstarPiste(0,0,10,10);
+        AstarPiste p2 = new AstarPiste(0,1,12,20);
+        AstarPiste p3 = new AstarPiste(1,0,15,30);
         p1.setEdellinen(p3);
         astIso.relax(p1,p2);
         

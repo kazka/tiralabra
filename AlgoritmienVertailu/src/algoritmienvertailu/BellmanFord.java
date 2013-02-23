@@ -55,9 +55,21 @@ public class BellmanFord {
                 }
             }
         }
-        this.pisteet[0][0].setDist(0);
+        asetaAlkuDist();
         haeKaaret();
     }
+    
+    /**
+     * Asettaa alkupisteen dist-arvoksi 0.
+     * Valitsee alkupisteen sen perusteella, onko käytössä normaali vai tyhjä labyrintti.
+     */
+    public void asetaAlkuDist(){
+        if (this.pisteet.length == 200){
+            this.pisteet[0][199].setDist(0);
+        } else {
+            this.pisteet[0][0].setDist(0);
+        }
+    } 
     
     /**
      * Luo kaarien listan ja kutsuu jokaiselle löytyneelle pisteelle metodia 

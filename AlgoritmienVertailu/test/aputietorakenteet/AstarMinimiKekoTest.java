@@ -47,8 +47,8 @@ public class AstarMinimiKekoTest {
      @Test
      public void tayteenKekoonEiVoiLisata() {
          keko = new AstarMinimiKeko(1);
-         AstarPiste p1 = new AstarPiste(0,0,"white",10,20);
-         AstarPiste p2 = new AstarPiste(0,0,"white",20,20);
+         AstarPiste p1 = new AstarPiste(0,0,10,20);
+         AstarPiste p2 = new AstarPiste(0,0,20,20);
          keko.add(p1);
          keko.add(p2);
          assertEquals(keko.remove(), p1);
@@ -109,11 +109,19 @@ public class AstarMinimiKekoTest {
     public boolean onkoVoimassa(AstarPiste[] kekotaulukko) {
         boolean voimassa = true;
         int i = 0;
-        while (kekotaulukko[2 * i + 2] != null){
+        while (kekotaulukko[2 * i + 2] != null || kekotaulukko[2 * i + 1] != null){
             int oikea = 2 * i + 2;
             int vasen = 2 * i + 1;
-            if (kekotaulukko[i].getDist() > kekotaulukko[oikea].getDist() || kekotaulukko[i].getDist() > kekotaulukko[vasen].getDist()){
-                voimassa = false;
+            if (kekotaulukko[oikea] == null){
+                if (kekotaulukko[i].getAlkuunPlusLoppuun() > kekotaulukko[vasen].getAlkuunPlusLoppuun()){
+                    voimassa = false;
+                    break;
+                }
+            } else {
+                if (kekotaulukko[i].getAlkuunPlusLoppuun() > kekotaulukko[oikea].getAlkuunPlusLoppuun() || kekotaulukko[i].getAlkuunPlusLoppuun() > kekotaulukko[vasen].getAlkuunPlusLoppuun()){
+                    voimassa = false;
+                    break;
+                }
             }
             i++;
         }

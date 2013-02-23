@@ -21,7 +21,7 @@ public class AstarPisteTest {
     
     @Before
     public void setUp() {
-        p = new AstarPiste(2,1,"white",10,20);
+        p = new AstarPiste(2,1,10,20);
     }
     
     @After
@@ -35,13 +35,6 @@ public class AstarPisteTest {
      }
      
      @Test
-     public void variAsetetaanOikein() {
-         assertEquals("white", p.getColor());
-         p.setColor("black");
-         assertEquals("black", p.getColor());
-     }     
-     
-     @Test
      public void distLoppuunAsetetaanOikein() {
          assertEquals(20, p.getDistLoppuun());
          p.setDistLoppuun(10);
@@ -50,7 +43,7 @@ public class AstarPisteTest {
      
      @Test
      public void edellinenAsetetaanOikein() {
-         AstarPiste ed = new AstarPiste(0,0,"white",40,50);
+         AstarPiste ed = new AstarPiste(0,0,40,50);
          p.setEdellinen(ed);
          assertEquals(ed, p.getEdellinen());
      }  
@@ -63,6 +56,7 @@ public class AstarPisteTest {
      @Test
      public void alkuunPlusLoppuunLasketaanOikeinJosAareton() {
          p.setDist(Integer.MAX_VALUE);
+         p.paivitaAlkuunPlusLoppuun();
          assertEquals(Integer.MAX_VALUE, p.getAlkuunPlusLoppuun());
      }       
 }
