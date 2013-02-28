@@ -44,7 +44,7 @@ public class Dijkstra {
     public final void alusta() {
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
-                if (this.laby[i][j] == 1) {
+                if (this.laby[i][j] != 0) {
                     this.pisteet[i][j] = new Piste(j, i, "white", Integer.MAX_VALUE);
                     keko.add(this.pisteet[i][j]);
                 }
@@ -58,9 +58,9 @@ public class Dijkstra {
      * Valitsee alkupisteen sen perusteella, onko käytössä normaali vai tyhjä labyrintti.
      */
     public void asetaAlkuDist(){
-        if (this.pisteet.length == 200){
-            this.pisteet[0][199].setDist(0);
-            this.keko.decKey(this.pisteet[0][199]);
+        if (this.pisteet.length == 200 || this.pisteet.length == 9){
+            this.pisteet[0][this.pisteet.length-1].setDist(0);
+            this.keko.decKey(this.pisteet[0][this.pisteet.length-1]);
         } else {
             this.pisteet[0][0].setDist(0);
         }
@@ -119,7 +119,7 @@ public class Dijkstra {
      * @param v Pisteen u vieressä oleva piste johon etäisyyttä tutkitaan
      */
     public void relax(Piste u, Piste v) {
-        int udist = u.getDist() + 1;
+        int udist = u.getDist() + this.laby[v.getY()][v.getX()];
         if (u.getDist() == Integer.MAX_VALUE){
             udist = u.getDist();
         }        
@@ -151,7 +151,7 @@ public class Dijkstra {
     public void tulosta() {
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
-                if (laby[i][j] == 1) {
+                if (laby[i][j] != 0) {
                     if (this.pisteet[i][j].getDist() == Integer.MAX_VALUE) {
                         System.out.print(String.format("%-4s", "x"));
                     } else {

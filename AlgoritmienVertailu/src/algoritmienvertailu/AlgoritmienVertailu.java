@@ -1,6 +1,7 @@
 
 package algoritmienvertailu;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,20 @@ public class AlgoritmienVertailu {
      * Lukija
      */
     private Scanner lukija;
+    
+    /**
+     * TEstilabyrintti, jonka lyhimmällä polulla on vaikeakulkuista maastoa (vuori).
+     */
+    static int[][] labyVuori = new int[][]
+        {{1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 2},
+        {1, 1, 1, 2, 2, 3, 3, 3, 4},
+        {2, 2, 2, 2, 3, 4, 4, 4, 4},
+        {2, 2, 3, 3, 3, 4, 4, 5, 4},
+        {2, 2, 2, 2, 3, 4, 4, 4, 4},
+        {1, 1, 1, 2, 2, 3, 3, 3, 4},
+        {1, 1, 1, 1, 1, 1, 1, 1, 2},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1}};    
     
     /**
      * Konstruktori
@@ -59,7 +74,7 @@ public class AlgoritmienVertailu {
      */
     public int[][] kysyLabyrintinKoko(){
         String koko = "";
-        while(!(koko.equals("pieni") || koko.equals("keski") || koko.equals("iso") || koko.equals("tyhja"))){
+        while(!(koko.equals("pieni") || koko.equals("keski") || koko.equals("iso") || koko.equals("tyhja") || koko.equals("vuori"))){
             System.out.println("Minkä kokoisella labyrintilla testataan?");
             System.out.println("Vaihtoehdot: pieni (20x20 ruutua), keski (100x100 ruutua), iso (400x400 ruutua), tyhja (200x200 ruutua, seinätön)");
             koko = lukija.nextLine();
@@ -78,6 +93,8 @@ public class AlgoritmienVertailu {
         int[][] laby;
         if (koko.equals("tyhja")){
             return generoiTyhjaLaby();
+        } else if (koko.equals("vuori")){
+            return labyVuori;
         } else if (koko.equals("pieni")){
             laby = new int[20][20];
         } else if (koko.equals("keski")){
@@ -105,10 +122,11 @@ public class AlgoritmienVertailu {
      * @param laby Valitun kokoinen labyrintti jonne esteet luodaan
      */
     public void generoiSeinat(int[][] laby){
+        Random rnd = new Random();
         for (int i = 0; i < laby.length; i++) {
             for (int j = 0; j < laby[0].length; j++) {
                 if(Math.random() < 0.7) {
-                    laby[i][j] = 1;
+                    laby[i][j] = rnd.nextInt(9)+1;
                 }
             }
         }

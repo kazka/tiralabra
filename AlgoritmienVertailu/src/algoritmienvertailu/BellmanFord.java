@@ -49,7 +49,7 @@ public class BellmanFord {
     public final void alusta() {
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
-                if (this.laby[i][j] == 1) {
+                if (this.laby[i][j] != 0) {
                     this.pisteet[i][j] = new Piste(j, i, Integer.MAX_VALUE);
                     this.solmumaara++;
                 }
@@ -64,8 +64,8 @@ public class BellmanFord {
      * Valitsee alkupisteen sen perusteella, onko käytössä normaali vai tyhjä labyrintti.
      */
     public void asetaAlkuDist(){
-        if (this.pisteet.length == 200){
-            this.pisteet[0][199].setDist(0);
+        if (this.pisteet.length == 200 || this.pisteet.length == 9){
+            this.pisteet[0][this.pisteet.length-1].setDist(0);
         } else {
             this.pisteet[0][0].setDist(0);
         }
@@ -79,7 +79,7 @@ public class BellmanFord {
         this.kaaret = new LinkitettyLista();
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
-                if (this.laby[i][j] == 1) {
+                if (this.laby[i][j] != 0) {
                     etsiLahtevatKaaret(this.pisteet[i][j]);
                 }
             }
@@ -140,7 +140,7 @@ public class BellmanFord {
         while (tutkittava.getNext() != null) {
             tutkittava = tutkittava.getNext();
             Kaari uv = (Kaari) tutkittava.getData();
-            if (uv.getLahde().getDist() + 1 != Integer.MIN_VALUE && uv.getLahde().getDist() + 1 < uv.getKohde().getDist()){
+            if (uv.getLahde().getDist() != Integer.MAX_VALUE && uv.getLahde().getDist() + this.laby[uv.getKohde().getY()][uv.getKohde().getX()] < uv.getKohde().getDist()){
                 System.out.println("löytyi negatiivinen sykli " + uv.getLahde().getX() + "," + uv.getLahde().getY() + "," + uv.getKohde().getX() + "," + uv.getKohde().getY());
             }
         } 
@@ -156,7 +156,7 @@ public class BellmanFord {
      * @param v Pisteen u vieressä oleva piste johon etäisyyttä tutkitaan
      */
     public void relax(Piste u, Piste v) {
-        int udist = u.getDist() + 1;
+        int udist = u.getDist() + this.laby[v.getY()][v.getX()];
         if (u.getDist() == Integer.MAX_VALUE){
             udist = u.getDist();
         }
@@ -187,7 +187,7 @@ public class BellmanFord {
     public void tulosta() {
         for (int i = 0; i < this.laby.length; i++) {
             for (int j = 0; j < this.laby[0].length; j++) {
-                if (laby[i][j] == 1) {
+                if (laby[i][j] != 0) {
                     if (this.pisteet[i][j].getDist() == Integer.MAX_VALUE) {
                         System.out.print(String.format("%-4s", "x"));
                     } else {
