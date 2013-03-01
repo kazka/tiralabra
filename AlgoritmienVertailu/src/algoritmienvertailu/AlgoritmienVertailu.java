@@ -76,7 +76,7 @@ public class AlgoritmienVertailu {
         String koko = "";
         while(!(koko.equals("pieni") || koko.equals("keski") || koko.equals("iso") || koko.equals("tyhja") || koko.equals("vuori"))){
             System.out.println("Minkä kokoisella labyrintilla testataan?");
-            System.out.println("Vaihtoehdot: pieni (20x20 ruutua), keski (100x100 ruutua), iso (400x400 ruutua), tyhja (200x200 ruutua, seinätön)");
+            System.out.println("Vaihtoehdot: pieni (20x20 ruutua), keski (100x100 ruutua), iso (400x400 ruutua), tyhja (200x200 ruutua, seinätön), vuori (este polulla)");
             koko = lukija.nextLine();
         }
         return generoiLabyrintti(koko);

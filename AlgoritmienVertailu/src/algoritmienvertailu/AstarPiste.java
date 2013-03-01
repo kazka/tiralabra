@@ -33,10 +33,9 @@ public class AstarPiste extends Piste {
     }
     
     /**
-     * Metodi joka palauttaa etäisyyksien/arvioiden summan alkuun + loppuun.
+     * Metodi joka päivittää etäisyyksien/arvioiden summan alkuun + loppuun.
      * Arvo jonka perusteella haetaan minimikeosta pienin.
      * 
-     * @return Etäisyyksien summa alkuun + loppuun
      */
     public final void paivitaAlkuunPlusLoppuun(){
         if (super.getDist() == Integer.MAX_VALUE){

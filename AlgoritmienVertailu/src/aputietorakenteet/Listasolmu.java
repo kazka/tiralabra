@@ -89,7 +89,7 @@ public class Listasolmu {
     /**
      * Asettaa solmua edeltävän solmun
      * 
-     * @param next Solmua edeltävä solmu
+     * @param prev Solmua edeltävä solmu
      */
     public void setPrev(Listasolmu prev) {
         this.prev = prev;
